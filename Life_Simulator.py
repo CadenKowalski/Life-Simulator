@@ -6,7 +6,10 @@ def Life_Simulator():
     global Sickness
     global Last_P_Situation
     global P_Situation
+    global A_Situation
+    global Effort_In_School
     global money
+    global relationship
     print('Project Info: Made by Caden Kowalski, Project Start Date: 12/3/18, Time for completion: 3:09:21')
     boy_f_names = ['Liam', 'Noah', 'William', 'James', 'Logan', 'Benjamin', 'Mason', 'Elijah', 'Oliver', 'Jacob', 'Lucas', 'Michael', 'Alexander', 'Ethan', 'Daniel', 'Mathew', 'Aiden', 'Henry', 'Jackson']
     girl_f_names = ['Emma', 'Olivia', 'Sophia', 'Isabella', 'Ava', 'Mia', 'Emily', 'Abigail', 'Madison', 'Harper', 'Sofia', 'Avery', 'Elizabeth', 'Amelia', 'Aubrey', 'Ella', 'Chloe', 'Victoria', 'Grace']
@@ -35,6 +38,8 @@ def Life_Simulator():
                 print('Type "STOP" to start game')
     def New_Life():
         global player_info
+        global mom
+        global dad
         player_info = [] #[Gender, First Name, Last Name, Age, Happiness, Health, Smarts, Looks] 
         mom = [] # [First Name, Last Name, Age, Relationship, Generosity, Money]
         dad = []
@@ -84,6 +89,7 @@ def Life_Simulator():
         money = random.randint(1, 100)
         dad.append(money)
     def Relationship(gender):
+        global relationship
         relationship = [] #[gender, First Name, Last Name, Age, Looks, Smarts, Money]
         if gender == 'Boy':
             relationship.append('Girl')
@@ -94,7 +100,7 @@ def Life_Simulator():
             select_name = random.randint(1, len(boy_f_names) - 1)
             relationship.append(boy_f_names[select_name])
         select_name = random.randint(1, len(l_names) - 1)
-        relationshi.append(l_names[select_name])
+        relationship.append(l_names[select_name])
         if player_info[3] >= 13 and player_info[3] < 18:
             age = random.randint(13, 17)
             relationship.append(age)
@@ -129,16 +135,19 @@ def Life_Simulator():
             print('You are too old to get into a relationship')
     def Prints(Situation):
         if Situation == 'Sick':
+            print('Announcement:')
+            print()
             print('You are sick')
-        if Situation == 'Child':
-            print('You started elementary school')
+            print('XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX')
     def Get_Action(Situation):
         global player_info
         global Suicide
         global Sickness
         global Last_P_Situation
         global P_Situation
+        global A_Situation
         global money
+        global Effort_In_School
         if Situation == 'Baby':
             print('1.) Age')
             print('2.) Go to the doctor')
@@ -149,17 +158,25 @@ def Life_Simulator():
                 Action = input('Choose an action: ')
             if Action == '1':
                 player_info[3] += 1
+                if player_info[3] > 4:
+                    A_Situation = 'Child'
+                    P_Situation = 'Child'
                 if Sickness == True:
                     player_info[5] -= 2
-                Sick = random.randint(1,2)
+                Sick = random.randint(1,10)
                 if Sick == 1:
+                    Last_P_Situation = P_Situation
                     Sickness = True
                     P_Situation = 'Sick'
+                print('XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX')
+                print('Stats:')
+                print()
                 print('Age: ' + str(player_info[3]))
                 print('Happiness: ' + str(player_info[4]) + '%')
                 print('Health: ' + str(player_info[5]) + '%')
                 print('Smarts: ' + str(player_info[6]) + '%')
                 print('Looks: ' + str(player_info[7]) + '%')
+                print('XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX')
             elif Action == '2':
                 if Sickness == True:
                     print('You have been cured')
@@ -180,17 +197,35 @@ def Life_Simulator():
                 Action = input('Choose an action: ')
             if Action == '1':
                 player_info[3] += 1
+                if player_info[3] > 11:
+                    A_Situation = 'Teenager'
+                    P_Situation = 'Teenager'
                 if Sickness == True:
                     player_info[5] -= 2
-                Sick = random.randint(1,2)
+                Sick = random.randint(1,10)
                 if Sick == 1:
+                    Last_P_Situation = P_Situation
                     Sickness = True
                     P_Situation = 'Sick'
+                print('XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX')
+                print('Stats:')
+                print()
                 print('Age: ' + str(player_info[3]))
                 print('Happiness: ' + str(player_info[4]) + '%')
                 print('Health: ' + str(player_info[5]) + '%')
                 print('Smarts: ' + str(player_info[6]) + '%')
                 print('Looks: ' + str(player_info[7]) + '%')
+                print('XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX')
+                if player_info[3] == 6:
+                    print('Announcement:')
+                    print()
+                    print('You started elementary school')
+                    print('XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX')
+                else:
+                    if Sickness == False:
+                        print('Announcements:')
+                        print()
+                        print('XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX')
             elif Action == '2':
                 if Sickness == True:
                     print('You have been cured')
@@ -212,22 +247,39 @@ def Life_Simulator():
             print('7.) Mind and Body')
             print('8.) Ask your parents for money')
             Action = input('Choose an action: ')
-            while Action != '1' and Action != '2' and Action != '3' and Action != '4' and Action != '5' and Action != '6' and Action != '7':
+            while Action != '1' and Action != '2' and Action != '3' and Action != '4' and Action != '5' and Action != '6' and Action != '7' and Action != '8':
                 print('Invalid input')
                 Action = input('Choose an action: ')
             if Action == '1':
                 player_info[3] += 1
+                if player_info[3] > 13 and player_info[3] < 18:
+                    A_Situation = 'Teenager'
+                    P_Situation = 'Teenager'
                 if Sickness == True:
                     player_info[5] -= 2
                 Sick = random.randint(1,2)
                 if Sick == 1:
                     Sickness = True
                     P_Situation = 'Sick'
+                print('XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX')
+                print('Stats:')
+                print()
                 print('Age: ' + str(player_info[3]))
                 print('Happiness: ' + str(player_info[4]) + '%')
                 print('Health: ' + str(player_info[5]) + '%')
                 print('Smarts: ' + str(player_info[6]) + '%')
                 print('Looks: ' + str(player_info[7]) + '%')
+                print('XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX')
+                if player_info[3] == 13:
+                    print('Announcement:')
+                    print()
+                    print('You started high school')
+                    print('XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX')
+                else:
+                    if Sickness == False:
+                        print('Announcements:')
+                        print()
+                        print('XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX')
             elif Action == '2':
                 if Sickness == True:
                     print('You have been cured')
@@ -248,16 +300,22 @@ def Life_Simulator():
             elif Action == '6':
                 look_again = 'yes'
                 while look_again == 'yes':
-                    print(Relationship(player_info[0]))
-                    accept = input('Do you want to ask the out')
-                    while accept != 'yes' and accpet != 'no':
+                    Relationship(player_info[0])
+                    print(relationship[1], relationship[2])
+                    print('Age: ' + str(relationship[3]))
+                    print('Looks: ' + str(relationship[4]))
+                    print('Smarts: ' + str(relationship[5]))
+                    print('Money: ' + str(relationship[6]))
+                    accept = input('Do you want to ask them out: ')
+                    while accept != 'yes' and accept != 'no':
                         print('Invalid input')
-                        accept = input('Do you want to ask the out')
+                        accept = input('Do you want to ask the out: ')
                     if accept == 'yes':
                         print('They said yes!')
+                        look_again = 'no'
                     else:
                         look_again = input('Do you want to look for another date?: ')
-                        while look_again != 'yes' and accpet != 'no':
+                        while look_again != 'yes' and look_again != 'no':
                             print('Invalid input')
                             look_again = input('Do you want to look for another date?: ')
                         
@@ -282,8 +340,8 @@ def Life_Simulator():
             elif Action == '8':
                 parent = random.randint(1, 2)
                 if parent == 1:
-                    print('Your mom gave you: ', end = '')
                     if mom[4] > 50:
+                        print('Your mom gave you: ', end = '')
                         if mom[5] <= 25:
                             print('$100')
                             money += 100
@@ -299,8 +357,8 @@ def Life_Simulator():
                     else:
                         print('Your parents did not give you any money')
                 else:
-                    print('Your dad gave you: ', end = '')
                     if dad[4] > 50:
+                        print('Your dad gave you: ', end = '')
                         if dad[5] <= 25:
                             print('$100')
                             money += 100
@@ -330,20 +388,17 @@ def Life_Simulator():
         P_Situation = 'Baby'
         A_Situation = 'Baby'
         Last_P_Situation = 'Baby'
+    print('XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX')
+    print('Stats:')
+    print()
     print('Age: ' + str(player_info[3]))
     print('Happiness: ' + str(player_info[4]) + '%')
     print('Health: ' + str(player_info[5]) + '%')
     print('Smarts: ' + str(player_info[6]) + '%')
     print('Looks: ' + str(player_info[7]) + '%')
+    print('XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX')
     while Suicide != True:
+        Get_Action(A_Situation)
         Prints(P_Situation)
-        if Suicide == False:
-            if player_info[3] > 6 and player_info[3] < 13:
-                A_Situation = 'Child'
-                P_Situation = 'Child'
-            elif player_info[3] > 13 and player_info[3] < 18:
-                A_Situation = 'Teenager'
-                P_Situation = 'Teenager'
-            Get_Action(A_Situation)
     print('You Died at the age of: ' + str(player_info[3]))
 Life_Simulator()
