@@ -8,7 +8,9 @@ def Life_Simulator():
     global Effort_In_School
     global money
     global relationship
-    print('Project Info: Made by Caden Kowalski, Project Start Date: 12/3/18, Days spent: 4, Actual time for completion: 3:09:21')
+    global High_School_Diploma
+    global College_Diploma
+    print('Project Info: Made by Caden Kowalski, Project Start Date: 12/3/18, Days spent: 5, Actual time for completion: 6:31:39')
     boy_f_names = ['Liam', 'Noah', 'William', 'James', 'Logan', 'Benjamin', 'Mason', 'Elijah', 'Oliver', 'Jacob', 'Lucas', 'Michael', 'Alexander', 'Ethan', 'Daniel', 'Mathew', 'Aiden', 'Henry', 'Jackson']
     girl_f_names = ['Emma', 'Olivia', 'Sophia', 'Isabella', 'Ava', 'Mia', 'Emily', 'Abigail', 'Madison', 'Harper', 'Sofia', 'Avery', 'Elizabeth', 'Amelia', 'Aubrey', 'Ella', 'Chloe', 'Victoria', 'Grace']
     l_names = ['Smith', 'Johnson', 'Williams', 'Jones', 'Brown', 'Davis', 'Miller', 'Moore', 'Taylor', 'Anderson', 'Thomas', 'Jackson', 'Harris', 'Martin', 'Thompson', 'Robinson', 'Martinez', 'Clark']
@@ -86,51 +88,85 @@ def Life_Simulator():
         dad.append(Generosity)
         money = random.randint(1, 100)
         dad.append(money)
+    def Relationship_Finals():
+        global Look_Again
+        print(relationship[1], relationship[2])
+        print('Age: ' + str(relationship[3]))
+        print('Looks: ' + str(relationship[4]) + '%')
+        print('Smarts: ' + str(relationship[5]) + '%')
+        print('Money: ' + str(relationship[6]) + '%')
+        if relationship[0] == 'Boy':
+            Ask_Out = input('Do you want to ask him out?: ').lower()
+            Look_Again = 'no'
+        else:
+            Ask_Out = input('Do you want to ask her out?: ').lower()
+            Look_Again = 'no'
+        while Ask_Out != 'yes' and Ask_Out != 'no':
+            print('Invalid Input')
+            if relationship[0] == 'Boy':
+                Ask_Out = input('Do you want to ask him out?: ').lower()
+                Look_Again = 'no'
+            else:
+                Ask_Out = input('Do you want to ask her out?: ').lower()
+                Look_Again = 'no'
+        if Ask_Out == 'yes':
+            if relationship[0] == 'Boy':
+                print('He said yes!!')
+            else:
+                print('She said yes!!')
+        else:
+            Look_Again = input('Do you want to keep looking?: ').lower()
+            while Look_Again != 'yes' and Look_Again != 'no':
+                print('Invalid input')
+                Look_Again = input('Do you want to keep looking?: ').lower()
     def Relationship():
         global relationship
-        relationship = [] #[gender, First Name, Last Name, Age, Looks, Smarts, Money]
-        if gender == 'Boy':
-            relationship.append('Girl')
-            select_name = random.randint(1, len(boy_f_names) - 1)
-            relationship.append(boy_f_names[select_name])
-        else:
-            relationship.append('Boy')
-            select_name = random.randint(1, len(boy_f_names) - 1)
-            relationship.append(boy_f_names[select_name])
-        select_name = random.randint(1, len(l_names) - 1)
-        relationship.append(l_names[select_name])
-        if player_info[3] >= 13 and player_info[3] < 18:
-            age = random.randint(13, 17)
-            relationship.append(age)
-            looks = random.randint(50, 100)
-            relationship.append(looks)
-            smarts = random.randint(1, 75)
-            relationship.append(smarts)
-            money = random.randint(1, 50)
-            relationship.append(money)
-            return relationship
-        elif player_info[3] >= 18 and player_info[3] <= 30:
-            age = random.randint(18, 30)
-            relationship.append(age)
-            looks = random.randint(50, 85)
-            relationship.append(looks)
-            smarts = random.randint(50, 75)
-            relationship.append(smarts)
-            money = random.randint(50, 75)
-            relationship.append(money)
-            return relationship
-        elif player_info[3] >= 30 and player_info[3] <= 60:
-            age = random.randint(30, 60)
-            relationship.append(age)
-            money = random.randint(50, 100)
-            relationship.append(money)
-            looks = random.randint(25, 75)
-            relationship.append(looks)
-            smarts = random.randint(50, 100)
-            relationship.append(smarts)
-            return relationship
-        else:
-            print('You are too old to get into a relationship')
+        global Look_Again
+        Look_Again = 'yes'
+        while Look_Again == 'yes':
+            relationship = [] #[gender, First Name, Last Name, Age, Looks, Smarts, Money]
+            if player_info[0] == 'Boy':
+                relationship.append('Girl')
+                select_name = random.randint(1, len(girl_f_names) - 1)
+                relationship.append(boy_f_names[select_name])
+            else:
+                relationship.append('Boy')
+                select_name = random.randint(1, len(boy_f_names) - 1)
+                relationship.append(boy_f_names[select_name])
+            select_name = random.randint(1, len(l_names) - 1)
+            relationship.append(l_names[select_name])
+            if player_info[3] >= 13 and player_info[3] < 18:
+                age = random.randint(13, 17)
+                relationship.append(age)
+                looks = random.randint(50, 100)
+                relationship.append(looks)
+                smarts = random.randint(1, 75)
+                relationship.append(smarts)
+                money = random.randint(1, 50)
+                relationship.append(money)
+                Relationship_Finals()
+            elif player_info[3] >= 18 and player_info[3] <= 30:
+                age = random.randint(18, 30)
+                relationship.append(age)
+                looks = random.randint(50, 85)
+                relationship.append(looks)
+                smarts = random.randint(50, 75)
+                relationship.append(smarts)
+                money = random.randint(50, 75)
+                relationship.append(money)
+                Relationship_Finals()
+            elif player_info[3] >= 30 and player_info[3] <= 60:
+                age = random.randint(30, 60)
+                relationship.append(age)
+                money = random.randint(50, 100)
+                relationship.append(money)
+                looks = random.randint(25, 75)
+                relationship.append(looks)
+                smarts = random.randint(50, 100)
+                relationship.append(smarts)
+                Relationship_Finals()
+            else:
+                print('You are too old to get into a relationship')
     def Age():
         global player_info
         global Sickness
@@ -148,6 +184,13 @@ def Life_Simulator():
         Sick = random.randint(1,10)
         if Sick == 4:
             Sickness = True
+        if player_info[3] > 6 and player_info[3] <= 13:
+            player_info[6] += 1
+        elif player_info[3] < 18 and player_info[3] > 13 and High_School_Diploma != False:
+            player_info[6] += 2
+        elif player_info[3] < 23 and player_info[3] >= 18 and College_Diploma != False:
+            player_info[6] += 3
+        Valid_Stats()
         print('XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX')
         print('Stats:')
         print()
@@ -160,7 +203,12 @@ def Life_Simulator():
         if player_info[3] == 6:
             print('Announcement:')
             print()
-            print('You started elementary school')
+            print('You started Elementary School')
+            announcement = True
+        if player_info[3] == 13:
+            print('Announcement:')
+            print()
+            print('You started High School')
             announcement = True
         if Sickness == True:
             if announcement == True:
@@ -257,6 +305,24 @@ def Life_Simulator():
         else:
             print('Your parents did not give you any money')
             print('XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX')
+    def Valid_Stats():
+        global player_info
+        if player_info[4] < 0:
+            player_info[4] = 0
+        elif player_info[4] > 100:
+            player_info[4] = 100
+        if player_info[5] < 0:
+            player_info[5] = 0
+        elif player_info[5] > 100:
+            player_info[5] = 100
+        if player_info[6] < 0:
+            player_info[6] = 0
+        elif player_info[6] > 100:
+            player_info[6] = 100
+        if player_info[7] < 0:
+            player_info[7] = 0
+        elif player_info[7] > 100:
+            player_info[7] = 100
     def Get_Action(Situation):
         if Situation == 'Baby':
             print('Actions:')
@@ -301,8 +367,8 @@ def Life_Simulator():
             print('1.) Age')
             print('2.) Go to the doctor')
             print('3.) Study harder in school')
-            print('4.) Drop out of high school')
-            print('5.) Love') # Need to fix
+            print('4.) Drop out of High School')
+            print('5.) Love')
             print('6.) Mind and Body')
             print('7.) Ask your parents for money')
             print('8.) End life')
@@ -331,6 +397,8 @@ def Life_Simulator():
     Sickness = False
     Effort_In_School = 0
     money = 0
+    High_School_Diploma = True
+    College_Diploma = True
     print('1.) Start a new life')
     action = input('Choose an action: ')
     while action != '1':
