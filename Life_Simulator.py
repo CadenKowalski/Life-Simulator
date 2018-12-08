@@ -17,6 +17,7 @@ def Life_Simulator(Bet):
     global High_School_Diploma
     global College_Diploma
     global Drivers_License
+    global In_College
     boy_f_names = ['Liam', 'Noah', 'William', 'James', 'Logan', 'Benjamin', 'Mason', 'Elijah', 'Oliver', 'Jacob', 'Lucas', 'Michael', 'Alexander', 'Ethan', 'Daniel', 'Mathew', 'Aiden', 'Henry', 'Jackson']
     girl_f_names = ['Emma', 'Olivia', 'Sophia', 'Isabella', 'Ava', 'Mia', 'Emily', 'Abigail', 'Madison', 'Harper', 'Sofia', 'Avery', 'Elizabeth', 'Amelia', 'Aubrey', 'Ella', 'Chloe', 'Victoria', 'Grace']
     l_names = ['Smith', 'Johnson', 'Williams', 'Jones', 'Brown', 'Davis', 'Miller', 'Moore', 'Taylor', 'Anderson', 'Thomas', 'Jackson', 'Harris', 'Martin', 'Thompson', 'Robinson', 'Martinez', 'Clark']
@@ -60,7 +61,7 @@ def Life_Simulator(Bet):
             player_info.append(girl_f_names[select_name])
         select_name = random.randint(1, len(l_names) - 1)
         player_info.append(l_names[select_name])
-        Age = 0
+        Age = 13
         player_info.append(Age)
         Happiness = random.randint(1, 100)
         player_info.append(Happiness)
@@ -207,6 +208,7 @@ def Life_Simulator(Bet):
         print('Health: ' + str(player_info[5]) + '%')
         print('Smarts: ' + str(player_info[6]) + '%')
         print('Looks: ' + str(player_info[7]) + '%')
+        print('Money: $' + str(money))
         print('XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX')
         if player_info[3] == 6:
             print('Announcement:')
@@ -231,6 +233,11 @@ def Life_Simulator(Bet):
                 print()
                 print('You failed you drivers test. You can try again any time')
                 announcement = True
+        if player_info[3] == 18 and High_School_Diploma != False:
+            print('Announcement:')
+            print()
+            print('You graduated from High School')
+            announcement = True
         if Sickness == True:
             if announcement == True:
                 print('You are sick')
@@ -244,7 +251,7 @@ def Life_Simulator(Bet):
     def Doctor():
         global Sickness
         global money
-        if player_info[3] < 17:
+        if player_info[3] < 18:
             if Sickness == True:
                 print('You have been cured')
                 print('XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX')
@@ -276,12 +283,14 @@ def Life_Simulator(Bet):
     def Drop_Out():
         global High_School_Diploma
         global College_Diploma
+        global In_College
         if A_Situation == 'Teenager':
             High_School_Diploma = False
             print('You dropped out of High School')
         elif A_Situation == 'College':
             College_Diploma = False
-            print('You dropped put of College')
+            In_College = False
+            print('You dropped out of College')
         print('XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX')
     def Mind_Body():
         global player_info
@@ -353,6 +362,81 @@ def Life_Simulator(Bet):
             player_info[7] = 0
         elif player_info[7] > 100:
             player_info[7] = 100
+    def Go_To_College():
+        global Major
+        global money
+        global In_College
+        if High_School_Diploma == True and player_info[6] > 50:
+            print('Majors:')
+            print('1.) Business')
+            print('2.) Law')
+            print('3.) Medical')
+            print('4.) Computer Science')
+            Major = input('Choose a major: ')
+            while Major != '1' and Major != '2' and Major != '3' and Major != '4':
+                print('Invalid input')
+                Major = input('Choose a major: ')
+            if Major == '1':
+                print('Information:')
+                print('Years: 4')
+                print('Cost: $50,000')
+            elif Major == '2':
+                print('Information:')
+                print('Years: 4')
+                print('Cost: $65,000')
+            elif Major == '3':
+                print('Information:')
+                print('Years: 7')
+                print('Cost: $80,000')
+            elif Major == '4':
+                print('Information:')
+                print('Years: 4')
+                print('Cost: $45,000')
+            payed_for = False
+            while payed_for == False:
+                print('Payments:')
+                print('1.) Scholarship')
+                print('2.) Ask your parents to pay')
+                print('3.) Student loan')
+                Payment = input('How do you want to pay?: ')
+                while Payment != '1' and Payment != '2' and Payment != '3':
+                    print('Invalid input')
+                    Payment = input('How do you want to pay?: ')
+                if Payment == '1':
+                    if player_info[6] > 75:
+                        payed_for = True
+                        In_College = True
+                        print('Your scholarship was approved')
+                        print('You started College')
+                        print('XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX')
+                    else:
+                        print('You did not get a scholarship')
+                elif Payment == '2':
+                    if mom[4] > 50 or dad[4] > 50:
+                        payed_for = True
+                        In_College = True
+                        print('Your parents agreed to pay for your College')
+                        print('You started College')
+                        print('XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX')
+                    else:
+                        print('Your parents would not pay for your College')
+                else:
+                    print('You applied for student loans')
+                    if Major == '1':
+                        money -= 50000
+                    elif Major == '2':
+                        money -= 65000
+                    elif Major == '3':
+                        money -= 80000
+                    elif mpney == '4':
+                        money -= 45000
+                    payed_for = True
+                    In_College = True
+                    print('You started College')
+                    print('XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX')
+        else:
+            print('You were not accepted into college')
+            print('XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX')
     def Get_Action(Situation):
         if Situation == 'Baby':
             print('Actions:')
@@ -425,11 +509,72 @@ def Life_Simulator(Bet):
                 Mind_Body()
             elif Action == '7':
                 Ask_For_Money()
+            elif Drivers_License == False and player_info[3] > 16:
+                if Action == '8':
+                    Drivers_Test()
+                elif Action == '9':
+                    Commit_Suicide()
+            else:
+                if Action == '8':
+                    Commit_Suicide()
+        elif Situation == 'College':
+            print('Actions:')
+            print()
+            print('1.) Age')
+            print('2.) Go to the doctor')
+            print('3.) Go to College')
+            print('4.) Study harder in College')
+            print('5.) Drop out of College')
+            print('6.) Love')
+            print('7.) Mind and Body')
+            print('8.) Ask your parents for money')
+            if Drivers_License == False and player_info[3] > 16:
+                print('9.) Take drivers test')
+                print('10.) End life')
+            else:
+                print('9.) End life')
+            print('XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX')
+            Action = input('Choose an action: ')
+            while Action != '1' and Action != '2' and Action != '3' and Action != '4' and Action != '5' and Action != '6' and Action != '7' and Action != '8' and Action != '9' and Action != '10':
+                print('Invalid input')
+                Action = input('Choose an action: ')
+            if Action == '1':
+                Age()
+            elif Action == '2':
+                Doctor()
+            elif Action == '3':
+                if In_College == True:
+                    print('You are already in college')
+                    print('XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX')
+                else:
+                    Go_To_College()
+            elif Action == '4':
+                if In_College == False:
+                    print('You are not in College yet')
+                    print('XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX')
+                else:
+                    Study()
+            elif Action == '5':
+                if In_College == False:
+                    print('You are not in College yet')
+                    print('XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX')
+                else:
+                    Drop_Out()
+            elif Action == '6':
+                Relationship()
+            elif Action == '7':
+                Mind_Body()
             elif Action == '8':
-                Drivers_Test()
+                Ask_For_Money()
             elif Drivers_License == False and player_info[3] > 16:
                 if Action == '9':
+                    Drivers_Test()
+                elif Action == '10':
                     Commit_Suicide()
+            else:
+                if Action == '9':
+                    Commit_Suicide()
+                
     Suicide = False
     Sickness = False
     Effort_In_School = 0
@@ -438,6 +583,7 @@ def Life_Simulator(Bet):
     College_Diploma = True
     Drivers_License = False
     action = ''
+    In_College = False
     while action != '1':
         print('1.) Start a new life')
         print('2.) Credits')
@@ -456,7 +602,7 @@ def Life_Simulator(Bet):
             print('Creator: Caden Kowalski')
             print('Start Date: 12/3/18')
             print('Days Spent: 5')
-            print('Actual Time Coding: 6:31:39')
+            print('Actual Time Coding: 7:01:16')
             print('XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX')
     print('XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX')
     print('Stats:')
