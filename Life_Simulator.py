@@ -1,5 +1,11 @@
 import random
-def Life_Simulator():
+Admin = False
+def Life_Simulator(Bet):
+    if Admin == False:
+        while Bet < 5000:
+            print('Invalid input')
+            print('The minimum bet for this game is $5000')
+            Bet = input('Bet: ')
     global Money
     global player_info
     global Suicide
@@ -10,7 +16,7 @@ def Life_Simulator():
     global relationship
     global High_School_Diploma
     global College_Diploma
-    print('Project Info: Made by Caden Kowalski, Project Start Date: 12/3/18, Days spent: 5, Actual time for completion: 6:31:39')
+    global Drivers_License
     boy_f_names = ['Liam', 'Noah', 'William', 'James', 'Logan', 'Benjamin', 'Mason', 'Elijah', 'Oliver', 'Jacob', 'Lucas', 'Michael', 'Alexander', 'Ethan', 'Daniel', 'Mathew', 'Aiden', 'Henry', 'Jackson']
     girl_f_names = ['Emma', 'Olivia', 'Sophia', 'Isabella', 'Ava', 'Mia', 'Emily', 'Abigail', 'Madison', 'Harper', 'Sofia', 'Avery', 'Elizabeth', 'Amelia', 'Aubrey', 'Ella', 'Chloe', 'Victoria', 'Grace']
     l_names = ['Smith', 'Johnson', 'Williams', 'Jones', 'Brown', 'Davis', 'Miller', 'Moore', 'Taylor', 'Anderson', 'Thomas', 'Jackson', 'Harris', 'Martin', 'Thompson', 'Robinson', 'Martinez', 'Clark']
@@ -167,10 +173,12 @@ def Life_Simulator():
                 Relationship_Finals()
             else:
                 print('You are too old to get into a relationship')
+        print('XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX')
     def Age():
         global player_info
         global Sickness
         global A_Situation
+        global Drivers_License
         announcement = False
         player_info[3] += 1
         if player_info[3] > 5:
@@ -210,6 +218,19 @@ def Life_Simulator():
             print()
             print('You started High School')
             announcement = True
+        if player_info[3] == 16:
+            if player_info[6] > 50:
+                Drivers_License = True
+                print('Announcement:')
+                print()
+                print('You revieved your Drivers License')
+                announcement = True
+            else:
+                Drivers_Licesne = False
+                print('Announcement:')
+                print()
+                print('You failed you drivers test. You can try again any time')
+                announcement = True
         if Sickness == True:
             if announcement == True:
                 print('You are sick')
@@ -305,6 +326,15 @@ def Life_Simulator():
         else:
             print('Your parents did not give you any money')
             print('XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX')
+    def Drivers_Test():
+        global Drivers_Test
+        if player_info[6] > 50:
+            Drivers_Licesne = True
+            print('You recieved your drivers license')
+            print('XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX')
+        else:
+            print('You failed your driving test. You can try again any time')
+            print('XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX')
     def Valid_Stats():
         global player_info
         if player_info[4] < 0:
@@ -371,10 +401,14 @@ def Life_Simulator():
             print('5.) Love')
             print('6.) Mind and Body')
             print('7.) Ask your parents for money')
-            print('8.) End life')
+            if Drivers_License == False and player_info[3] > 16:
+                print('8.) Take drivers test')
+                print('9.) End life')
+            else:
+                print('8.) End life')
             print('XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX')
             Action = input('Choose an action: ')
-            while Action != '1' and Action != '2' and Action != '3' and Action != '4' and Action != '5' and Action != '6' and Action != '7' and Action != '8':
+            while Action != '1' and Action != '2' and Action != '3' and Action != '4' and Action != '5' and Action != '6' and Action != '7' and Action != '8' and Action != '9':
                 print('Invalid input')
                 Action = input('Choose an action: ')
             if Action == '1':
@@ -392,24 +426,38 @@ def Life_Simulator():
             elif Action == '7':
                 Ask_For_Money()
             elif Action == '8':
-                Commit_Suicide()
+                Drivers_Test()
+            elif Drivers_License == False and player_info[3] > 16:
+                if Action == '9':
+                    Commit_Suicide()
     Suicide = False
     Sickness = False
     Effort_In_School = 0
     money = 0
     High_School_Diploma = True
     College_Diploma = True
-    print('1.) Start a new life')
-    action = input('Choose an action: ')
+    Drivers_License = False
+    action = ''
     while action != '1':
-        print('Invalid input')
+        print('1.) Start a new life')
+        print('2.) Credits')
         action = input('Choose an action: ')
-    if action == '1':
-        New_Life()
-        print('My name is: ' + player_info[1] + ' ' + player_info[2])
-        P_Situation = 'Baby'
-        A_Situation = 'Baby'
-        Last_P_Situation = 'Baby'
+        while action != '1' and action != '2':
+            print('Invalid input')
+            action = input('Choose an action: ')
+        if action == '1':
+            New_Life()
+            print('My name is: ' + player_info[1] + ' ' + player_info[2])
+            P_Situation = 'Baby'
+            A_Situation = 'Baby'
+            Last_P_Situation = 'Baby'
+        elif action == '2':
+            print('XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX')
+            print('Creator: Caden Kowalski')
+            print('Start Date: 12/3/18')
+            print('Days Spent: 5')
+            print('Actual Time Coding: 6:31:39')
+            print('XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX')
     print('XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX')
     print('Stats:')
     print()
@@ -422,4 +470,4 @@ def Life_Simulator():
     while Suicide != True:
         Get_Action(A_Situation)
     print('You Died at the age of: ' + str(player_info[3]))
-Life_Simulator()
+Life_Simulator(5000)
